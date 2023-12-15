@@ -8,8 +8,8 @@ function f = getnotefreqs(data, divs, Fs, mode)
        curr_note = zeropadtopow2(curr_note);
        if mode == 1
            % use HPS
-           f(i) = hps(curr_note, Fs, i);
-       elseif mode == 2
+           f(i) = hps(curr_note, Fs);
+       else 
            % use max amplitude frequency
            n = length(curr_note);
            curr_fft = abs(fft_new(curr_note));

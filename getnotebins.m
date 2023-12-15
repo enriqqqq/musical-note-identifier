@@ -5,8 +5,8 @@
 % n2 - n3 is the second note's time interval
 
 function divs = getnotebins(data)
-    thresup = 0.2 * max(data);      % 10% of maximum value
-    thresdown = 0.01 * max(data);   % 0.1% of maximum value
+    thresup = 0.2 * max(data);      % 20% of maximum value
+    thresdown = 0.02 * max(data);   % 2% of maximum value
     len = length(data);
     divs = zeros(1,2);              % pre-allocation
     quiet = 1;

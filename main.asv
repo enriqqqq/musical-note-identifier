@@ -1,6 +1,6 @@
 clc; clear; close;
-[y,Fs] = audioread("audio_files\cdepiano.wav"); % https://freepats.zenvoid.org/
-Ts = 1/Fs;
+[y,Fs] = audioread("audio_files\UprightPianoKW-SFZ-20220221\samples\"); % https://freepats.zenvoid.org/
+Ts = 1/Fs
 [~, cols] = size(y);
 
 % choose the algorithm to determine the fundamental frequency of the notes
