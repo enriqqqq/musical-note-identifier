@@ -1,12 +1,7 @@
 clc; clear; close;
-[y,Fs] = audioread("audio_files\cdepiano.wav"); % https://freepats.zenvoid.org/
+[y,Fs] = audioread("audio_files\MultipleNotes_1.wav");
 Ts = 1/Fs;
 [~, cols] = size(y);
-
-% choose the algorithm to determine the fundamental frequency of the notes
-% 1 for HPS
-% 2 for max amplitude
-mode = 1;
 
 if cols == 1 % single channel (mono)
     audio = y;
@@ -53,16 +48,20 @@ sgtitle('Time and Frequency Domain Representations of Audio File');
 divs = getnotebins(smoothed_abs_audio);
 
 % Get each note's frequency
-f = getnotefreqs(audio, divs, Fs, mode);
+f = getnotefreqs(audio, divs, Fs);
 
 % Get each note's semitone
 notes = identifynotes(f);
 
 % Display Results
-disp('Seconds         | Note');
+header_str = sprintf('%-18s | %-4s | %s', 'Seconds', 'Note', 'Frequency');
+disp(header_str);
+
 for i=1:size(notes,2)
     curr_t_lowlim = divs(2*i-1)*Ts;
     curr_t_uplim = divs(2*i)*Ts;
     curr_note = notes{i};
-    fprintf('%.4f - %.4f | %s\n', curr_t_lowlim, curr_t_uplim, curr_note);
+    curr_freq = f(i);
+    curr_interval_str = sprintf('%.4f - %.4f', curr_t_lowlim, curr_t_uplim);
+    fprintf('%-18s | %-4s | %.4f\n', curr_interval_str, curr_note, curr_freq);
 end
